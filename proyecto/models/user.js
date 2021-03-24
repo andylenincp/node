@@ -5,7 +5,14 @@ mongoose.connect("mongodb://localhost/fotos", { useUnifiedTopology: true, useNew
 
 var valores_sex = ["M", "F"];
 
-var email_match = [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/, "Ingrese un email válido"];
+var email_match = [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Ingrese un email válido"];
+
+var password_validation = {
+    validator: function(p) {
+        return this.password_confirmation == p;
+    },
+    message: "Las contraseñas no son iguales"
+}
 
 var user_schema = new Schema({
     name: String,
@@ -18,7 +25,8 @@ var user_schema = new Schema({
     password: {
         type: String,
         required: true,
-        minlength: [8, "La contraseña es muy corta"]
+        minlength: [8, "La contraseña es muy corta"],
+        validate: password_validation
     },
     age: {
         type: Number, 

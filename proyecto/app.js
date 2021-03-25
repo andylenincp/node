@@ -29,14 +29,25 @@ app.post("/users", function(req,res) {
         username: req.body.username,
         password_confirmation: req.body.password_confirmation
     });
-    console.log(user.password_confirmation);
 
+    /*
     user.save(function(err) {
         if (err) {
             console.log(String(err));
         }
         res.send("Datos almacenados");
     });
-})
+    */
+
+    user.save().then(function(us) {
+        res.send("Usuario registrado correctamente");
+    }, function(err) {
+        if (err) {
+            console.log(String(err));
+            res.send("Ha ocurrido un error");
+        }
+    });
+    
+});
 
 app.listen(8080);

@@ -1,11 +1,17 @@
 extends ./layout.jade
 block contenido 
-    form(action="/sessions", method="post") 
-        div(class="form-group")
-            label(for="email") Email
-            input(type="email", name="email", placeholder="Email", id="email", class="form-control", required)
-        div(class="form-group")
-            label(for="password") Contraseña 
-            input(type="password", name="password", placeholder="Password", id="password", class="form-control", required)
-        div(class="form-group")
-            input(type="submit", value="Acceder", class="btn btn-info")
+    div(class="container col-md-6 remove-float center-block big-top-space")
+        h1 Inicio de sesión
+        br
+        form(action="/sessions", method="post") 
+            div(class="form-group")
+                label(for="email") Email
+                input(type="email", name="email", placeholder="Email", id="email", class="form-control", required)
+            div(class="form-group")
+                label(for="password") Contraseña 
+                input(type="password", name="password", placeholder="Password", id="password", class="form-control", required)
+            div(class="row top-space")
+                div(class="col-xs-12 col-sm-6")
+                    input(type="submit", value="Acceder", class="btn btn-info")
+                div(class="col-xs-12 col-sm-6 text-right")
+                 a(href="/signup" class="") No tengo cuenta

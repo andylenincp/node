@@ -1,0 +1,12 @@
+extends ../../layout.jade
+block contenido 
+    div(class="container col-md-6 remove-float center-block big-top-space")
+        h1 Actualizar imagen
+        br
+        form(action="/app/imagenes/#{imagen.id}?_method=put", method="post") 
+            div(class="form-group")
+                label(for="title") Título
+                input(type="text", name="title", placeholder="Título", id="title", class="form-control", value="#{imagen.title}", required)
+            div(class="row top-space")
+                div(class="col-xs-12 col-sm-6")
+                    input(type="submit", value="Actualizar", class="btn btn-info")

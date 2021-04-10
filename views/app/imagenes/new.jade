@@ -3,7 +3,7 @@ block contenido
     div(class="container col-md-6 remove-float center-block big-top-space")
         h1 Subir nueva imagen
         br
-        form(action="/app/imagenes", method="post") 
+        form(action="/app/imagenes", method="post", enctype="multipart/form-data") 
             div(class="form-group")
                 label(for="title") Título
                 input(type="text", name="title", placeholder="Título", id="title", class="form-control", required)

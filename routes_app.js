@@ -2,6 +2,7 @@ const { Router } = require("express");
 var express = require("express");
 var Imagen = require("./models/imagenes");
 var router = express.Router();
+var fs = require("fs-extra");
 var image_finder_middleware = require("./middlewares/find_image");
 
 router.get("/", function(req,res) {
@@ -52,15 +53,21 @@ router.route("/imagenes")
         });
     })
     .post(function(req,res) {
-        console.log(res.locals.user._id);
+        var extension = req.files.archivo.name.split(".").pop();
         var data = {
             title: req.body.title,
-            creator: res.locals.user._id
+            creator: res.locals.user._id,
+            extension: extension
         }
         var imagen = new Imagen(data);
         imagen.save(function(err) {
             if (!err) {
-                res.redirect("/app/imagenes/"+imagen._id);
+                fs.copy(req.files.archivo.path, "public/imagenes/"+imagen._id+"."+extension, function(err) {
+                    if (err) {
+                        return console.error(err);
+                    }
+                    res.redirect("/app/imagenes/"+imagen._id);
+                });
             } else {
                 console.log(imagen);
                 res.render(err);
